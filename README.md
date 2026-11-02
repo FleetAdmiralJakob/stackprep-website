@@ -13,6 +13,7 @@ assets/js/main.js     waitlist form, progressive enhancement
 assets/img/           logo mark and favicon
 assets/fonts/         self-hosted fonts (see below)
 _headers              security headers for Netlify / Cloudflare Pages
+vercel.json           the same security headers for Vercel (where the site is hosted)
 .well-known/security.txt
 robots.txt
 brand/                logo files and LinkedIn banners (not linked from the site)

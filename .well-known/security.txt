@@ -1,0 +1,4 @@
+Contact: mailto:[security@deine-domain.de]
+Expires: 2027-11-01T00:00:00.000Z
+Preferred-Languages: de, en
+Canonical: https://[deine-domain.de]/.well-known/security.txt

@@ -1,0 +1,3 @@
+.DS_Store
+# Download bundles; the same files are in brand/ unzipped.
+brand/*.zip

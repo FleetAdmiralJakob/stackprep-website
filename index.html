@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <title>StackPrep: prüfungsreif für AP1, AP2 und Informatik-Klausuren</title>
-  <meta name="description" content="StackPrep lernt mit deinen Unterlagen aus Berufsschule, Betrieb oder Uni, findet heraus, was dir für AP1, AP2 oder die Klausur noch fehlt, und übt genau das mit dir.">
+  <title>stackprep: prüfungsreif für AP1, AP2 und Informatik-Klausuren</title>
+  <meta name="description" content="Prüfungsvorbereitung für alle IT-Ausbildungsberufe: stackprep findet heraus, was dir für AP1, AP2 oder die Klausur noch fehlt, und übt genau das mit dir. Für Azubis immer kostenlos.">
   <meta name="theme-color" content="#F7F8FC" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#05070F" media="(prefers-color-scheme: dark)">
-  <meta property="og:title" content="StackPrep: prüfungsreif für AP1, AP2 und Informatik-Klausuren">
-  <meta property="og:description" content="Prüfungsvorbereitung für Fachinformatiker:innen und Informatik-Studierende, mit deinem eigenen Stoff.">
+  <meta property="og:title" content="stackprep: prüfungsreif für AP1, AP2 und Informatik-Klausuren">
+  <meta property="og:description" content="Prüfungsvorbereitung für alle IT-Ausbildungsberufe und Informatik-Studierende, mit geprüftem Lernmaterial und deinem eigenen Stoff.">
   <meta property="og:type" content="website">
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/assets/fonts/Sora-Variable.woff2" as="font" type="font/woff2" crossorigin>
@@ -23,13 +23,14 @@
 
   <header class="site-header">
     <div class="container site-header__inner">
-      <a class="brand" href="/" aria-label="StackPrep, zur Startseite">
+      <a class="brand" href="/" aria-label="stackprep, zur Startseite">
         <img class="brand__mark" src="/assets/img/logo-mark.svg" alt="" width="36" height="36">
         <span class="brand__word"><span class="brand__stack">stack</span><span class="brand__prep">prep</span></span>
       </a>
       <nav class="site-nav" aria-label="Hauptnavigation">
         <a href="#probleme">Probleme</a>
         <a href="#ablauf">So funktioniert's</a>
+        <a href="/betriebe/">Für Betriebe</a>
       </nav>
       <div class="site-header__actions">
         <button class="theme-toggle" type="button" aria-label="Dunkles Design" aria-pressed="false" data-theme-toggle hidden>
@@ -46,23 +47,53 @@
       <div class="container hero__inner">
         <div class="hero__copy">
           <h1 id="hero-title">Prüfungsreif für AP1, AP2 <span class="accent">und jede Klausur.</span></h1>
-          <p class="hero__lead">StackPrep liest deine Unterlagen aus Berufsschule, Betrieb oder Uni, findet heraus, was dir noch fehlt, und übt genau das mit dir. Für Fachinformatiker:innen in der Ausbildung und Informatik-Studierende.</p>
+          <p class="hero__lead">stackprep liest deine Unterlagen aus Berufsschule, Betrieb oder Uni, findet heraus, was dir noch fehlt, und übt genau das mit dir. Für alle IT-Ausbildungsberufe und Informatik-Studierende.</p>
 
           <div class="hero__actions">
             <a class="pill-button" href="#warteliste">Auf die Warteliste <span class="pill-button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+            <a class="hero__link" href="/betriebe/">Für Ausbildungsbetriebe</a>
           </div>
 
           <div class="proof">
             <ul class="proof__avatars" aria-hidden="true">
-              <li>AE</li>
-              <li>SI</li>
-              <li>DPA</li>
-              <li>DV</li>
+              <li>FI</li>
+              <li>ITSE</li>
+              <li>KITS</li>
+              <li>KDM</li>
               <li>Uni</li>
             </ul>
             <p>Schon <strong>20+ Kund:innen</strong> haben mit uns für ihre Prüfung gelernt</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="section section--tight" aria-labelledby="kosten-title">
+      <div class="container">
+        <article class="card pilot-offer">
+          <div class="pilot-offer__copy">
+            <h2 id="kosten-title" class="pilot-offer__title">Für Azubis ist stackprep <span class="accent">immer kostenlos.</span></h2>
+            <p>Du zahlst nichts, weder jetzt noch nach der Prüfung. Kein Abo, keine Testphase, die plötzlich etwas kostet.</p>
+          </div>
+          <ul class="pilot-offer__steps pilot-offer__steps--list">
+            <li>
+              <svg class="pilot-offer__icon pilot-offer__icon--free" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>
+              <div>
+                <p class="pilot-offer__label">Für Azubis</p>
+                <h3>Immer kostenlos</h3>
+                <p>Alle Funktionen, für AP1, AP2 und jede Klausur.</p>
+              </div>
+            </li>
+            <li>
+              <svg class="pilot-offer__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/></svg>
+              <div>
+                <p class="pilot-offer__label">Finanziert durch</p>
+                <h3>Ausbildungsbetriebe</h3>
+                <p>Betriebe zahlen eine Lizenz, damit stackprep für dich kostenlos bleibt.</p>
+              </div>
+            </li>
+          </ul>
+        </article>
       </div>
     </section>
 
@@ -144,13 +175,45 @@
       </div>
     </section>
 
+    <section class="section section--tight" aria-labelledby="betriebe-teaser-title">
+      <div class="container">
+        <a class="card cta-band" href="/betriebe/">
+          <div>
+            <h2 id="betriebe-teaser-title" class="cta-band__title">Ihr bildet IT-Azubis aus?</h2>
+            <p>Für unsere Pilotphase suchen wir Ausbildungsbetriebe, die ihre Azubis gezielt auf AP1 und AP2 vorbereiten wollen.</p>
+          </div>
+          <span class="pill-button pill-button--light">Für Ausbildungsbetriebe <span class="pill-button__arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></span>
+        </a>
+      </div>
+    </section>
+
     <section id="warteliste" class="section section--signup" aria-labelledby="signup-title">
       <div class="container">
         <div class="signup">
           <h2 id="signup-title" class="section__title">Sei beim Start <span class="accent">dabei.</span></h2>
-          <p class="section__lead">Über 20 Kund:innen haben schon mit uns gelernt. Jetzt öffnen wir StackPrep für die nächste Gruppe. Trag dich ein, und wir melden uns, sobald du loslegen kannst.</p>
+          <p class="section__lead">Über 20 Kund:innen haben schon mit uns gelernt. Jetzt öffnen wir stackprep für die nächste Gruppe, und für Azubis ist es immer kostenlos. Trag dich ein, und wir melden uns, sobald du loslegen kannst.</p>
 
-          <form class="waitlist" action="/api/waitlist" method="post" data-waitlist>
+          <form class="waitlist" action="/api/waitlist" method="post" data-lead-form="waitlist">
+            <label class="visually-hidden" for="beruf">Ausbildungsberuf (freiwillig)</label>
+            <select class="waitlist__select" id="beruf" name="beruf">
+              <option value="">Dein Ausbildungsberuf (freiwillig)</option>
+              <optgroup label="Fachinformatiker:in">
+                <option value="fi_ae">FI Anwendungsentwicklung</option>
+                <option value="fi_si">FI Systemintegration</option>
+                <option value="fi_dpa">FI Daten- und Prozessanalyse</option>
+                <option value="fi_dv">FI Digitale Vernetzung</option>
+              </optgroup>
+              <optgroup label="Weitere IT-Berufe">
+                <option value="itse">IT-System-Elektroniker:in</option>
+                <option value="kits">Kaufleute für IT-System-Management</option>
+                <option value="kdm">Kaufleute für Digitalisierungsmanagement</option>
+              </optgroup>
+              <optgroup label="Sonstiges">
+                <option value="studium">Informatik-Studium</option>
+                <option value="andere">Etwas anderes</option>
+              </optgroup>
+            </select>
+
             <label class="visually-hidden" for="email">E-Mail-Adresse</label>
             <div class="waitlist__field">
               <input id="email" name="email" type="email" placeholder="deine@email.de" autocomplete="email" inputmode="email" maxlength="254" required>
@@ -161,9 +224,11 @@
               <label for="website">Website</label>
               <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
             </div>
+            <input type="hidden" name="quelle" data-attribution="source">
+            <input type="hidden" name="kampagne" data-attribution="campaign">
 
             <label class="check"><input type="checkbox" name="alter" value="16plus" required><span>Ich bin mindestens 16 Jahre alt.</span></label>
-            <label class="check"><input type="checkbox" name="einwilligung" value="ja" required><span>Ich möchte per E-Mail erfahren, wann StackPrep startet. Abmelden geht jederzeit, mehr in der <a href="/datenschutz.html">Datenschutzerklärung</a>.</span></label>
+            <label class="check"><input type="checkbox" name="einwilligung" value="ja" required><span>Ich möchte per E-Mail erfahren, wann stackprep startet. Abmelden geht jederzeit, mehr in der <a href="/datenschutz.html">Datenschutzerklärung</a>.</span></label>
 
             <p class="form-status" role="status" aria-live="polite" data-status></p>
           </form>
@@ -174,7 +239,7 @@
 
   <footer class="site-footer">
     <div class="container site-footer__inner">
-      <p>© 2026 StackPrep</p>
+      <p>© 2026 stackprep</p>
       <ul>
         <li><a href="/impressum.html">Impressum</a></li>
         <li><a href="/datenschutz.html">Datenschutz</a></li>

@@ -14,7 +14,7 @@ export function GET(request) {
 
   return pageResponse(200, {
     title: 'Anmeldung bestätigen',
-    message: 'Ein Klick noch, dann bist du auf der Warteliste von StackPrep.',
+    message: 'Ein Klick noch, dann bist du auf der Warteliste von stackprep.',
     form: { action: '/api/waitlist/confirm', token, label: 'Anmeldung bestätigen' },
   });
 }
@@ -36,7 +36,7 @@ export async function POST(request) {
 
     return pageResponse(200, {
       title: 'Du bist dabei',
-      message: 'Danke, deine Anmeldung ist bestätigt. Wir melden uns, sobald du mit StackPrep loslegen kannst.',
+      message: 'Danke, deine Anmeldung ist bestätigt. Wir melden uns, sobald du mit stackprep loslegen kannst.',
     });
   } catch (error) {
     console.error('[waitlist] confirm failed', error instanceof Error ? error.message : error);

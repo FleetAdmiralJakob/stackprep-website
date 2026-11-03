@@ -4,12 +4,20 @@ import { createHash, createHmac, randomBytes } from 'node:crypto';
 
 // Bump this whenever the checkbox texts in index.html change, so every stored
 // consent can be matched to the text the person actually agreed to.
-export const CONSENT_TEXT_VERSION = '2026-11-03';
+export const CONSENT_TEXT_VERSION = '2026-11-04';
+// The same for the checkbox of the company form in index.html.
+export const COMPANY_CONSENT_TEXT_VERSION = '2026-11-03';
 
 const MAX_BODY_BYTES = 8 * 1024;
 const MAX_EMAIL_LENGTH = 254;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const TOKEN_PATTERN = /^[A-Za-z0-9_-]{43}$/;
+const MAX_COMPANY_NAME_LENGTH = 120;
+const CAMPAIGN_VALUE_PATTERN = /^[a-z0-9][a-z0-9._-]{0,39}$/;
+
+// The values of the profession fields in index.html; Convex accepts the same list.
+export const PROFESSIONS = new Set(['fi_ae', 'fi_si', 'fi_dpa', 'fi_dv', 'itse', 'kits', 'kdm', 'studium', 'andere']);
+export const APPRENTICE_COUNTS = new Set(['1-5', '6-20', '21-50', '50+']);
 
 const readEnv = (name) => {
   const value = process.env[name]?.trim();
@@ -40,6 +48,22 @@ export const isBodyTooLarge = (request) =>
 export const normalizeEmail = (value) => (typeof value === 'string' ? value.trim().toLowerCase() : '');
 
 export const isValidEmail = (email) => email.length <= MAX_EMAIL_LENGTH && EMAIL_PATTERN.test(email);
+
+export const normalizeCompanyName = (value) => (typeof value === 'string' ? value.trim().replace(/\s+/g, ' ') : '');
+
+export const isValidCompanyName = (name) => name.length >= 2 && name.length <= MAX_COMPANY_NAME_LENGTH;
+
+const normalizeCampaignValue = (value) => {
+  const normalized = typeof value === 'string' ? value.trim().toLowerCase() : '';
+  return CAMPAIGN_VALUE_PATTERN.test(normalized) ? normalized : undefined;
+};
+
+// Where a visitor came from: the hidden fields the script fills from utm_source,
+// utm_campaign or the referrer. Anything malformed is dropped, never rejected.
+export const readAttribution = (form) => ({
+  source: normalizeCampaignValue(form.get('quelle')),
+  campaign: normalizeCampaignValue(form.get('kampagne')),
+});
 
 export const createToken = () => randomBytes(32).toString('base64url');
 
@@ -81,17 +105,17 @@ export const sendConfirmationEmail = async (email, token) => {
     body: JSON.stringify({
       from: requireEnv('WAITLIST_FROM_EMAIL'),
       to: [email],
-      subject: 'Bitte bestätige deine Anmeldung bei StackPrep',
+      subject: 'Bitte bestätige deine Anmeldung bei stackprep',
       text: [
         'Hallo,',
         '',
-        'du hast dich für die Warteliste von StackPrep eingetragen. Bitte bestätige deine Anmeldung über diesen Link:',
+        'du hast dich für die Warteliste von stackprep eingetragen. Bitte bestätige deine Anmeldung über diesen Link:',
         '',
         link,
         '',
         'Der Link ist 48 Stunden gültig. Wenn du dich nicht eingetragen hast, kannst du diese E-Mail einfach ignorieren.',
         '',
-        'Dein StackPrep-Team',
+        'Dein stackprep-Team',
       ].join('\n'),
     }),
   });
@@ -134,7 +158,7 @@ export const pageResponse = (status, { title, message, form }) => {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>${escapeHtml(title)} · StackPrep</title>
+  <title>${escapeHtml(title)} · stackprep</title>
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
   <script src="/assets/js/theme.js"></script>
   <link rel="stylesheet" href="/assets/css/styles.css">
@@ -142,7 +166,7 @@ export const pageResponse = (status, { title, message, form }) => {
 <body>
   <header class="site-header">
     <div class="container site-header__inner">
-      <a class="brand" href="/" aria-label="StackPrep, zur Startseite">
+      <a class="brand" href="/" aria-label="stackprep, zur Startseite">
         <img class="brand__mark" src="/assets/img/logo-mark.svg" alt="" width="36" height="36">
         <span class="brand__word"><span class="brand__stack">stack</span><span class="brand__prep">prep</span></span>
       </a>
@@ -158,7 +182,7 @@ export const pageResponse = (status, { title, message, form }) => {
 
   <footer class="site-footer">
     <div class="container site-footer__inner">
-      <p>© 2026 StackPrep</p>
+      <p>© 2026 stackprep</p>
       <ul>
         <li><a href="/impressum.html">Impressum</a></li>
         <li><a href="/datenschutz.html">Datenschutz</a></li>

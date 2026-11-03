@@ -377,8 +377,33 @@ img {
   font-size: 1.1875rem;
 }
 
+.hero__eyebrow {
+  margin-bottom: 1.25rem;
+  color: var(--accent);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
   margin-top: 2.25rem;
+}
+
+.hero__link {
+  color: var(--muted);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-underline-offset: 0.25em;
+}
+
+.hero__link:hover {
+  color: var(--text);
 }
 
 .proof {
@@ -572,6 +597,10 @@ img {
   padding-block: clamp(4rem, 3rem + 4vw, 7rem);
 }
 
+.section--tight {
+  padding-top: 0;
+}
+
 .section__title {
   max-width: 22ch;
   margin-inline: auto;
@@ -641,6 +670,145 @@ img {
 .card__icon--problem {
   background: var(--wrong-soft);
   color: var(--wrong);
+}
+
+.card__icon--benefit {
+  background: color-mix(in srgb, #28C840 14%, transparent);
+  color: var(--verified);
+}
+
+.card--numbered {
+  counter-increment: step;
+}
+
+.card--numbered h3::before {
+  content: counter(step) ". ";
+  color: var(--accent);
+}
+
+/* Pilot offer on the company page */
+
+.pilot-offer {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 1rem + 3vw, 3rem);
+  align-items: center;
+  border-color: color-mix(in srgb, #28C840 40%, transparent);
+  background:
+    radial-gradient(28rem 14rem at 0% 0%, color-mix(in srgb, #28C840 14%, transparent), transparent 70%),
+    linear-gradient(180deg, var(--card-top), var(--card) 40%);
+}
+
+.pilot-offer__title {
+  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.pilot-offer__title .accent {
+  color: var(--verified);
+}
+
+.pilot-offer__steps {
+  display: grid;
+  gap: 1.75rem;
+  margin: 0;
+  padding: 0 0 0 clamp(1.5rem, 1rem + 2vw, 3rem);
+  border-left: 1px solid var(--card-border);
+  list-style: none;
+}
+
+.pilot-offer__steps li {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+/* Connects the two icons: now, then later. */
+.pilot-offer__steps li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 2.75rem;
+  bottom: -1.5rem;
+  left: 1.25rem;
+  width: 1px;
+  background: var(--card-border);
+}
+
+/* Items side by side, not a sequence: no connecting line. */
+.pilot-offer__steps--list li:not(:last-child)::after {
+  content: none;
+}
+
+.pilot-offer__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.5625rem;
+  border: 1px solid var(--inset-border);
+  border-radius: 50%;
+  background: var(--inset);
+  color: var(--accent);
+}
+
+.pilot-offer__icon--free {
+  border-color: color-mix(in srgb, #28C840 40%, transparent);
+  background: color-mix(in srgb, #28C840 14%, transparent);
+  color: var(--verified);
+}
+
+.card .pilot-offer__label {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pilot-offer__steps h3 {
+  margin-top: 0.125rem;
+}
+
+.pilot-offer__steps li:first-child h3 {
+  color: var(--verified);
+}
+
+.card .pilot-offer__steps p:last-child {
+  margin-top: 0.25rem;
+  font-size: 0.9375rem;
+}
+
+/* Teaser for training companies on the landing page */
+
+.cta-band {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  text-decoration: none;
+  background:
+    radial-gradient(28rem 14rem at 0% 0%, var(--glow), transparent 70%),
+    linear-gradient(180deg, var(--card-top), var(--card) 40%);
+}
+
+.cta-band > div {
+  flex: 1 1 24rem;
+}
+
+.cta-band__title {
+  font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+
+.cta-band:hover .pill-button--light {
+  opacity: 0.9;
 }
 
 /* Steps — a real sequence, so the order is numbered */
@@ -721,6 +889,83 @@ img {
     radial-gradient(30rem 16rem at 50% 0%, var(--glow), transparent 70%),
     linear-gradient(180deg, var(--card-top), var(--card) 50%);
   box-shadow: var(--shadow);
+}
+
+.signup--company {
+  max-width: 52rem;
+}
+
+.lead-form {
+  display: grid;
+  gap: 1.125rem;
+  margin-top: 2rem;
+}
+
+.lead-form__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.125rem;
+}
+
+.lead-form__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.field {
+  display: grid;
+  gap: 0.4375rem;
+}
+
+.field__label {
+  padding: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.field__hint {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.field input,
+.field select,
+.waitlist__select {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0 1rem;
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  background: var(--inset);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.field input::placeholder {
+  color: var(--muted);
+}
+
+.field input:focus-visible,
+.field select:focus-visible,
+.waitlist__select:focus-visible {
+  outline: none;
+  border-color: var(--focus);
+}
+
+.field input[aria-invalid="true"],
+.field select[aria-invalid="true"] {
+  border-color: var(--wrong);
+}
+
+.waitlist__select {
+  border-radius: 999px;
+  padding-inline: 1.375rem;
+  color: var(--muted);
+}
+
+.waitlist__select:has(option:checked:not([value=""])) {
+  color: var(--text);
 }
 
 .waitlist {
@@ -875,8 +1120,15 @@ img {
 /* Responsive */
 
 @media (max-width: 960px) {
+  .pilot-offer,
   .grid--3 {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pilot-offer__steps {
+    padding: 1.5rem 0 0;
+    border-top: 1px solid var(--card-border);
+    border-left: 0;
   }
 
   .site-nav {
@@ -885,8 +1137,14 @@ img {
 }
 
 @media (max-width: 760px) {
-  .grid--2 {
+  .grid--2,
+  .lead-form__row {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lead-form__actions .pill-button {
+    flex: 1;
+    justify-content: space-between;
   }
 }
 

@@ -1,18 +1,21 @@
 # StackPrep website
 
-Landing page for StackPrep: AP1/AP2 exam prep for IT apprentices (Fachinformatiker:innen) and computer science students in Germany. The page itself is in German, the target audience's language.
+Landing page for StackPrep: AP1/AP2 exam prep for all IT apprenticeships (Fachinformatiker:in, IT-System-Elektroniker:in, Kaufleute für IT-System-Management, Kaufleute für Digitalisierungsmanagement) and computer science students in Germany, plus a contact form for training companies. The page itself is in German, the target audience's language.
 
-Static site: plain HTML, one stylesheet, one small script. No build step, no dependencies, no third-party requests. The only server code is the waitlist endpoint in `api/`.
+Static site: plain HTML, one stylesheet, one small script. No build step, no dependencies, no third-party requests. The only server code is the endpoints in `api/`.
 
 ```
 index.html            landing page
+betriebe/index.html   page for training companies (/betriebe/) with the company form
 impressum.html        legal stub (fill in the [placeholders])
 datenschutz.html      privacy draft (fill in, then have it checked)
 assets/css/styles.css
-assets/js/main.js     waitlist form, progressive enhancement
+assets/js/main.js     forms (progressive enhancement) and visit attribution
 assets/img/           logo mark and favicon
 assets/fonts/         self-hosted fonts (see below)
 api/waitlist/         waitlist endpoints (Vercel functions, see below)
+api/betriebe/         form for training companies
+api/besuch.mjs        counts visits through links with a source
 _headers              security headers for Netlify / Cloudflare Pages
 vercel.json           the same security headers for Vercel (where the site is hosted)
 .well-known/security.txt
@@ -49,7 +52,22 @@ What the endpoint does:
 - Gives the same answer whether an address is new, pending or already confirmed, so the form does not reveal who is on the list.
 - Answers JSON when the script sends the form, and a plain page in the site's look for browsers without JavaScript. Every response is `Cache-Control: no-store`.
 
-When you change the checkbox texts in `index.html`, bump `CONSENT_TEXT_VERSION` in `api/_lib/waitlist.mjs`.
+When you change the checkbox texts in `index.html`, bump `CONSENT_TEXT_VERSION` (waitlist) or `COMPANY_CONSENT_TEXT_VERSION` (company form) in `api/_lib/waitlist.mjs`.
+
+The waitlist form also sends the optional profession (`beruf`) and the attribution (`quelle`, `kampagne`).
+
+## Company form
+
+The form for training companies lives on its own page, `/betriebe/`; the landing page links there. It posts to `/api/betriebe` (`api/betriebe/index.mjs`) and is stored in Convex (`convex/companyInquiries.ts`). Same origin check, honeypot and rate limit as the waitlist. There is no double opt-in, because it is a contact request, not a newsletter. Submitting again with the same address updates the inquiry instead of adding a second one.
+
+## What a post or link brings
+
+Use links with UTM parameters, for example `https://stackprep.de/?utm_source=linkedin&utm_campaign=launch-2026-11`. Values are lowercased and may contain `a-z 0-9 . _ -` (max. 40 characters).
+
+- `assets/js/main.js` reads `utm_source` and `utm_campaign`. Without `utm_source` it falls back to the referrer (LinkedIn, Google, Instagram and so on map to one name each). It stores nothing in the browser.
+- If there is a source, it sends one beacon to `/api/besuch`, which increments a daily counter per source and campaign in Convex (`campaignDailyStats`). Max. 30 counts per IP in 10 minutes.
+- Both forms send the source along, so every waitlist entry and company inquiry has it, and the daily counters also count signups, confirmations and company inquiries.
+- The numbers are in the admin dashboard of the StackPrep app (`/admin`, section "Herkunft der Anmeldungen").
 
 Environment variables on Vercel:
 

@@ -1,6 +1,7 @@
 // POST /api/waitlist: the waitlist form on the landing page.
 import {
   CONSENT_TEXT_VERSION,
+  PROFESSIONS,
   callConvex,
   createToken,
   hashToken,
@@ -12,6 +13,7 @@ import {
   normalizeEmail,
   pageResponse,
   rateLimitKey,
+  readAttribution,
   sendConfirmationEmail,
 } from '../_lib/waitlist.mjs';
 
@@ -56,7 +58,14 @@ export async function POST(request) {
   if (form.get('website')) return respond('success');
 
   const email = normalizeEmail(form.get('email'));
-  if (!isValidEmail(email) || form.get('alter') !== '16plus' || form.get('einwilligung') !== 'ja') {
+  // The profession is optional; an empty choice means "not given".
+  const profession = form.get('beruf') || undefined;
+  if (
+    !isValidEmail(email) ||
+    form.get('alter') !== '16plus' ||
+    form.get('einwilligung') !== 'ja' ||
+    (profession !== undefined && !PROFESSIONS.has(profession))
+  ) {
     return respond('invalid');
   }
 
@@ -67,6 +76,8 @@ export async function POST(request) {
       consentTextVersion: CONSENT_TEXT_VERSION,
       rateLimitKey: rateLimitKey(request),
       confirmationTokenHash: hashToken(token),
+      profession,
+      ...readAttribution(form),
     });
 
     if (result.status === 'rate_limited') return respond('limited');

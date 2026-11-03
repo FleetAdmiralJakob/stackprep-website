@@ -984,7 +984,8 @@ img {
 
 .form-status[data-state="success"] { color: var(--ok); }
 .form-status[data-state="error"],
-.form-status[data-state="invalid"] { color: var(--wrong); }
+.form-status[data-state="invalid"],
+.form-status[data-state="limited"] { color: var(--wrong); }
 .form-status[data-state="pending"] { color: var(--muted); }
 
 /* Footer */

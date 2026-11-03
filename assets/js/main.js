@@ -42,12 +42,15 @@
   const messages = {
     pending: 'Wird gesendet …',
     success: 'Fast geschafft. Bestätige deine Anmeldung über den Link in der E-Mail, die wir dir gerade geschickt haben.',
+    // Until the confirmation e-mail is set up, the server stores the entry without sending one.
+    successNoEmail: 'Danke, du bist vorgemerkt. Wir schicken dir noch eine E-Mail, mit der du deine Anmeldung bestätigst.',
     invalid: 'Bitte gib deine E-Mail-Adresse ein und bestätige beide Häkchen.',
+    limited: 'Zu viele Versuche. Bitte warte ein paar Minuten und versuch es dann noch einmal.',
     error: 'Die Anmeldung hat nicht geklappt. Prüf deine Verbindung und versuch es noch einmal.',
   };
 
-  const setStatus = (state) => {
-    status.textContent = messages[state];
+  const setStatus = (state, message = messages[state]) => {
+    status.textContent = message;
     status.dataset.state = state;
   };
 
@@ -86,9 +89,18 @@
         credentials: 'same-origin',
         redirect: 'error',
       });
+      if (response.status === 400) {
+        setStatus('invalid');
+        return;
+      }
+      if (response.status === 429) {
+        setStatus('limited');
+        return;
+      }
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const result = await response.json().catch(() => ({}));
       form.reset();
-      setStatus('success');
+      setStatus('success', result.confirmationEmail === false ? messages.successNoEmail : messages.success);
     } catch {
       setStatus('error');
     } finally {

@@ -2,7 +2,7 @@
 
 Landing page for StackPrep: AP1/AP2 exam prep for IT apprentices (Fachinformatiker:innen) and computer science students in Germany. The page itself is in German, the target audience's language.
 
-Static site: plain HTML, one stylesheet, one small script. No build step, no dependencies, no third-party requests.
+Static site: plain HTML, one stylesheet, one small script. No build step, no dependencies, no third-party requests. The only server code is the waitlist endpoint in `api/`.
 
 ```
 index.html            landing page
@@ -12,6 +12,7 @@ assets/css/styles.css
 assets/js/main.js     waitlist form, progressive enhancement
 assets/img/           logo mark and favicon
 assets/fonts/         self-hosted fonts (see below)
+api/waitlist/         waitlist endpoints (Vercel functions, see below)
 _headers              security headers for Netlify / Cloudflare Pages
 vercel.json           the same security headers for Vercel (where the site is hosted)
 .well-known/security.txt
@@ -23,7 +24,7 @@ brand/                logo files and LinkedIn banners (not linked from the site)
 
 1. **Fonts.** Done: `assets/fonts/Sora-Variable.woff2` (Sora v17, latin subset, weights 100–800, covers ä ö ü ß „“ €), licensed under the SIL Open Font License (`assets/fonts/Sora-OFL.txt`). It is self-hosted on purpose: embedding Google Fonts from Google's servers sends visitors' IP addresses to Google, which German courts have ruled a GDPR violation (LG München I, 3 O 17493/20). Until the files are there, the page falls back to system fonts.
 2. **Placeholders.** Search for `[` in `impressum.html`, `datenschutz.html` and `.well-known/security.txt`.
-3. **Waitlist backend.** The form posts `multipart/form-data` to `/api/waitlist`. See the checklist below.
+3. **Waitlist backend.** Built, see "Waitlist backend" below. The confirmation e-mail still needs an e-mail provider.
 4. **Headers.** Make sure your host sends the headers from `_headers`. Check with <https://securityheaders.com> and <https://observatory.mozilla.org> after deploying.
 
 ## Security model
@@ -35,16 +36,29 @@ brand/                logo files and LinkedIn banners (not linked from the site)
 - **Form script** writes only `textContent`, so nothing from the server or user input can inject markup. Without JavaScript the form still posts normally with native browser validation.
 - **Honeypot** field `website` catches simple bots.
 
-## Waitlist backend checklist
+## Waitlist backend
 
-The front end alone is not enough. The `/api/waitlist` endpoint must:
+The form posts `multipart/form-data` to `/api/waitlist` (`api/waitlist/index.mjs`). The entries are stored in the Convex backend of the StackPrep app (repo `Gamius00/stackprep-mvp`, `convex/waitlist.ts` and `convex/http.ts`). The two servers share a secret; the Convex routes reject every request without it.
 
-- Accept only `POST`, and reject requests whose `Origin` header is not your own domain (CSRF protection; the site uses no cookies).
-- Validate every field on the server: `email` (max. 254 chars, valid format), `alter = 16plus`, `einwilligung = ja`. Drop the request silently with `200` if `website` is not empty.
-- Rate-limit by IP (e.g. 5 requests per 10 minutes).
-- Use **double opt-in**: store the entry as unconfirmed, send a confirmation link with a random, single-use, expiring token, and only count it after the click. In Germany this is required for marketing e-mails (§ 7 UWG) and is the proof of consent under the GDPR. Store the consent time and text version.
-- Respond with JSON `200` on success and a `4xx` on validation errors. Never echo input back into HTML.
-- Send its own security headers and `Cache-Control: no-store`.
+What the endpoint does:
+
+- Accepts only `POST` from `SITE_URL` (and its `www.` variant), checked via the `Origin` header.
+- Validates `email` (max. 254 chars), `alter = 16plus` and `einwilligung = ja`. If the honeypot `website` is filled, it answers like a success and stores nothing.
+- Rate-limits to 5 requests per 10 minutes per IP. Only an HMAC of the IP is stored.
+- **Double opt-in**: stores the entry as `pending` with the consent time and `CONSENT_TEXT_VERSION`, and creates a random single-use token that expires after 48 hours. Only its SHA-256 hash is stored. The link in the e-mail opens `/api/waitlist/confirm`, which shows a button; only the button's `POST` confirms (mail scanners open links on their own).
+- Gives the same answer whether an address is new, pending or already confirmed, so the form does not reveal who is on the list.
+- Answers JSON when the script sends the form, and a plain page in the site's look for browsers without JavaScript. Every response is `Cache-Control: no-store`.
+
+When you change the checkbox texts in `index.html`, bump `CONSENT_TEXT_VERSION` in `api/_lib/waitlist.mjs`.
+
+Environment variables on Vercel:
+
+| Variable | Value |
+|---|---|
+| `CONVEX_SITE_URL` | HTTP actions URL of the Convex deployment, for production `https://moonlit-sparrow-601.eu-west-1.convex.site` |
+| `WAITLIST_API_SECRET` | Long random string; the same value as `WAITLIST_API_SECRET` on Convex |
+| `SITE_URL` | Optional, defaults to `https://stackprep.de` |
+| `RESEND_API_KEY`, `WAITLIST_FROM_EMAIL` | Optional. Once both are set, the confirmation e-mail is sent via [Resend](https://resend.com). Until then entries stay `pending` and the form says a confirmation e-mail will follow. |
 
 ## Same headers for other hosts
 

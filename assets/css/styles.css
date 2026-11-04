@@ -668,21 +668,7 @@ img {
   content: counter(step) ". ";
 }
 
-/* GitHub materials */
-
-.files__type--github {
-  display: inline-grid;
-  place-items: center;
-  width: 1.75rem;
-  padding: 0.1875rem 0;
-  background: var(--text);
-  color: var(--bg);
-}
-
-.files__type--github svg {
-  width: 0.75rem;
-  height: 0.75rem;
-}
+/* Material mockups */
 
 .files__verified {
   margin-left: auto;
@@ -712,11 +698,6 @@ img {
   font-weight: 600;
 }
 
-.practice__source svg {
-  width: 0.875rem;
-  height: 0.875rem;
-}
-
 .practice__source span {
   color: var(--muted);
   font-weight: 400;
@@ -726,166 +707,6 @@ img {
   color: var(--verified);
   font-size: 0.75rem;
   font-weight: 600;
-}
-
-.repo {
-  display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-  gap: clamp(1.5rem, 1rem + 3vw, 3.5rem);
-  margin-top: 1.25rem;
-  background:
-    radial-gradient(28rem 14rem at 0% 0%, var(--glow), transparent 70%),
-    linear-gradient(180deg, var(--card-top), var(--card) 40%);
-}
-
-.repo__head {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.repo__logo {
-  flex: none;
-  width: 3rem;
-  height: 3rem;
-  padding: 0.625rem;
-  border: 1px solid var(--inset-border);
-  border-radius: 14px;
-  background: var(--inset);
-}
-
-.card .repo__path {
-  margin-top: 0.25rem;
-  font-size: 0.875rem;
-}
-
-.card .repo__text {
-  margin-top: 1.25rem;
-  max-width: 36rem;
-}
-
-.repo__badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 1.5rem 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.repo__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.4375rem 0.875rem 0.4375rem 0.625rem;
-  border: 1px solid var(--inset-border);
-  border-radius: 999px;
-  background: var(--inset);
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.repo__badge svg {
-  width: 1.125rem;
-  height: 1.125rem;
-  color: var(--accent);
-}
-
-.repo__badge--verified {
-  border-color: color-mix(in srgb, #28C840 40%, transparent);
-  background: color-mix(in srgb, #28C840 12%, transparent);
-}
-
-.repo__badge--verified svg {
-  color: var(--verified);
-}
-
-.repo__side {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.5rem;
-}
-
-.repo__stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.75rem;
-  margin: 0;
-}
-
-.repo__stats > div {
-  padding: 1rem 1.125rem;
-  border: 1px solid var(--inset-border);
-  border-radius: 16px;
-  background: var(--inset);
-}
-
-.repo__stats dt {
-  display: flex;
-  align-items: center;
-  gap: 0.4375rem;
-  color: var(--muted);
-  font-size: 0.8125rem;
-}
-
-.repo__stats dt svg {
-  width: 0.9375rem;
-  height: 0.9375rem;
-}
-
-.repo__stats dt .repo__star {
-  color: #E3B341;
-}
-
-.repo__stats dd {
-  margin: 0.375rem 0 0;
-  font-size: 2rem;
-  font-weight: 500;
-  letter-spacing: -0.04em;
-  line-height: 1;
-}
-
-.repo__actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.75rem 1.25rem;
-}
-
-.repo__button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: 2.75rem;
-  padding: 0.5rem 1.125rem;
-  border: 1px solid var(--card-border);
-  border-radius: 999px;
-  background: var(--light-pill);
-  color: var(--on-light-pill);
-  font-size: 0.9375rem;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.repo__button:hover {
-  opacity: 0.9;
-}
-
-.repo__button svg {
-  width: 1rem;
-  height: 1rem;
-  color: #E3B341;
-}
-
-.repo__link {
-  color: var(--muted);
-  font-size: 0.9375rem;
-  text-underline-offset: 0.25em;
-}
-
-.repo__link:hover {
-  color: var(--text);
 }
 
 /* Waitlist */
@@ -1054,7 +875,6 @@ img {
 /* Responsive */
 
 @media (max-width: 960px) {
-  .repo,
   .grid--3 {
     grid-template-columns: minmax(0, 1fr);
   }

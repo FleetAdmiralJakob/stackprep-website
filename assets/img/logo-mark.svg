@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="StackPrep">
-  <rect width="512" height="512" rx="116" fill="#0A0F2C"/>
-  <g stroke-linejoin="round" transform="translate(256 256) scale(1.12) translate(-256 -256)">
-    <!-- AP1 -->
-    <path d="M256 248 392 320 256 392 120 320z" fill="#2440B8" stroke="#2440B8" stroke-width="8"/>
-    <!-- AP2 -->
-    <path d="M256 184 392 256 256 328 120 256z" fill="#3D6BFF" stroke="#0A0F2C" stroke-width="26"/>
-    <path d="M256 184 392 256 256 328 120 256z" fill="#3D6BFF" stroke="#3D6BFF" stroke-width="8"/>
-    <!-- Abschluss -->
-    <path d="M256 120 392 192 256 264 120 192z" fill="#FF3D57" stroke="#0A0F2C" stroke-width="26"/>
-    <path d="M256 120 392 192 256 264 120 192z" fill="#FF3D57" stroke="#FF3D57" stroke-width="8"/>
-    <path d="M214 172 238 190 214 208M254 210H294" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round"/>
+  <rect width="512" height="512" rx="116" fill="#0D1330"/>
+  <g stroke-linejoin="round">
+    <!-- Unterste Ebene -->
+    <path d="M256 249 409 329 256 409 103 329z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="8"/>
+    <!-- Mittlere Ebene, mit Abstand zur unteren -->
+    <path d="M256 176 409 256 256 336 103 256z" fill="#FFFFFF" stroke="#0D1330" stroke-width="26"/>
+    <path d="M256 176 409 256 256 336 103 256z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="8"/>
+    <!-- Oberste Ebene mit Terminal-Prompt -->
+    <path d="M256 103 409 183 256 263 103 183z" fill="#FFFFFF" stroke="#0D1330" stroke-width="26"/>
+    <path d="M256 103 409 183 256 263 103 183z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="8"/>
+    <path d="M208 160 234 180 208 200M252 202H296" fill="none" stroke="#0D1330" stroke-width="15" stroke-linecap="round"/>
   </g>
 </svg>

@@ -187,6 +187,7 @@ export const pageResponse = (status, { title, message, form }) => {
         <li><a href="/impressum.html">Impressum</a></li>
         <li><a href="/datenschutz.html">Datenschutz</a></li>
       </ul>
+      <p class="site-footer__note">stackprep ist ein unabhängiges Lernangebot und steht in keiner Verbindung zu den Industrie- und Handelskammern oder den Stellen, die die Prüfungsaufgaben erstellen.</p>
     </div>
   </footer>
 </body>
